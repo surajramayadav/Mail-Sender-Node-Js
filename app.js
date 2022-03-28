@@ -26,11 +26,11 @@ app.get("/test", (req, res) => {
 })
 
 app.post("/mail", async (req, res) => {
-  
+    
     await sendEmail({
-        email:"surajramayadav@gmail.com",
-        subject:"testing",
-        message:"this was testing mail"
+        email:req.body.email,
+        subject:req.body.subject,
+        message:req.body.message
     });
     res.status(200).json({
         success: true,
