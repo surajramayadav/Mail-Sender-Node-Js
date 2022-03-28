@@ -25,10 +25,10 @@ app.get("/test", (req, res) => {
 })
 
 app.post("/mail", async (req, res) => {
-    const { email, subject, message } = req.body
+    const {  subject, message } = req.body
     console.log(email, subject, message)
     await sendEmail({
-        email,
+        email:"surajramayadav@gmail.com",
         subject,
         message
     });
