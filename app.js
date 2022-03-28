@@ -20,7 +20,7 @@ var corsOptions = {
 app.use(cors(corsOptions));
 app.options("*", cors(corsOptions));
 app.use(bodyParser.urlencoded({ extended: false }));
-
+app.use(bodyParser.json())
 app.get("/test", (req, res) => {
     console.log("hii")
 })
