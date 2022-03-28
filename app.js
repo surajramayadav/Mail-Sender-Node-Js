@@ -7,7 +7,9 @@ const sendEmail = require("./utils/sendEmail");
 dotenv.config({ path: "./config/config.env" });
 
 const PORT = process.env.PORT || 5000
-const server = app.listen(PORT);
+const server = app.listen(PORT, () => {
+    console.log("server running")
+});
 
 var corsOptions = {
     // origin: "http://localhost:8081",
@@ -18,12 +20,17 @@ var corsOptions = {
 app.use(cors(corsOptions));
 app.options("*", cors(corsOptions));
 
+app.get("/test", (req, res) => {
+    console.log("hii")
+})
+
 app.post("/mail", async (req, res) => {
     const { email, subject, message } = req.body
+    console.log(email, subject, message)
     await sendEmail({
-        email: email,
-        subject: subject,
-        message: message,
+        email,
+        subject,
+        message
     });
     res.status(200).json({
         success: true,
