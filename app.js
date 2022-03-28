@@ -18,7 +18,7 @@ var corsOptions = {
 app.use(cors(corsOptions));
 app.options("*", cors(corsOptions));
 
-app.get("/mail", async (req, res) => {
+app.post("/mail", async (req, res) => {
     const { email, subject, message } = req.body
     await sendEmail({
         email: email,
