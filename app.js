@@ -5,7 +5,7 @@ const dotenv = require("dotenv");
 const { Server } = require("http");
 const sendEmail = require("./utils/sendEmail");
 dotenv.config({ path: "./config/config.env" });
-
+const bodyParser = require("body-parser");
 const PORT = process.env.PORT || 5000
 const server = app.listen(PORT, () => {
     console.log("server running")
