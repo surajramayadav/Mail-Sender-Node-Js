@@ -26,7 +26,7 @@ app.get("/test", (req, res) => {
 })
 
 app.post("/mail", async (req, res) => {
-    
+    console.log(req.body.email)
     await sendEmail({
         email:req.body.email,
         subject:req.body.subject,
