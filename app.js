@@ -6,10 +6,8 @@ const { Server } = require("http");
 const sendEmail = require("./utils/sendEmail");
 dotenv.config({ path: "./config/config.env" });
 
-const PORT = 4444
-const server = app.listen(PORT, () => {
-    console.log(`server is working on http://localhost:${PORT}`);
-});
+const PORT = process.env.PORT || 5000
+const server = app.listen(PORT);
 
 var corsOptions = {
     // origin: "http://localhost:8081",
