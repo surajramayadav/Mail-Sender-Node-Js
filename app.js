@@ -100,8 +100,5 @@ app.post("/mail", async (req, res) => {
         subject: req.body.subject,
         message: req.body.message
     });
-    res.status(200).json({
-        success: true,
-        message: "mail send"
-    })
+    // res.status(200)
 })
