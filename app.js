@@ -13,21 +13,27 @@ const swaggerUi = require("swagger-ui-express");
 
 const swaggerOptions = {
     swaggerDefinition: {
-        info: {
-            version: "1.0.0",
-            title: "Send Mail API",
-            description: "Mail API Information",
-            contact: {
-                name: "YOYO Developer"
-            },
-            servers: [
-                {
-                    url: 'https://mail-sender-node.herokuapp.com/',
-                    description: 'Development server',
-                },
-            ],
-        }
-    },
+        "swagger": "2.0",
+        "info": {
+          "version": "1.0.0", //version of the OpenAPI Specification
+          "title": "Send Mail",
+          "description": "Send Mail",
+          "license": {
+            "name": "MIT",
+          }
+        },
+        "host": "localhost:4444",
+        "basePath": "/",
+        "tags": [
+          {
+            "name": "Users",
+            "description": "API for users in the system"
+          }
+        ],
+        "schemes": ["http"],
+        "consumes": ["application/json"],
+        "produces": ["application/json"]
+      },
     // ['.routes/*.js']
     apis: ["app.js"]
 };
