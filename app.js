@@ -22,7 +22,7 @@ const swaggerOptions = {
             "name": "MIT",
           }
         },
-        "host": "localhost:4444",
+        "host": "mail-sender-node.herokuapp",
         "basePath": "/",
         "tags": [
           {
