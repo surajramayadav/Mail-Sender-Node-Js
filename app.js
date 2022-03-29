@@ -6,6 +6,39 @@ const { Server } = require("http");
 const sendEmail = require("./utils/sendEmail");
 dotenv.config({ path: "./config/config.env" });
 const bodyParser = require("body-parser");
+
+const swaggerJsDoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
+
+
+const swaggerOptions = {
+    swaggerDefinition: {
+        info: {
+            version: "1.0.0",
+            title: "Send Mail API",
+            description: "Mail API Information",
+            contact: {
+                name: "YOYO Developer"
+            },
+            servers: [
+                {
+                    url: 'https://mail-sender-node.herokuapp.com/',
+                    description: 'Development server',
+                },
+            ],
+        }
+    },
+    // ['.routes/*.js']
+    apis: ["app.js"]
+};
+
+
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+app.use("/docs",(req,res)=>{
+    res.status(200).json(swaggerDocs)
+})
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
 const PORT = process.env.PORT || 5000
 const server = app.listen(PORT, () => {
     console.log("server running")
@@ -21,16 +54,45 @@ app.use(cors(corsOptions));
 app.options("*", cors(corsOptions));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json())
+
+
+
 app.get("/test", (req, res) => {
     console.log("hii")
 })
 
+/**
+ * @swagger
+ * /mail:
+ *   post:
+ *     description: send mail 
+ *     consumes:
+ *       - application/json
+ *     parameters:
+ *      - in: body
+ *        name: mail
+ *        description: The user to create.
+ *        schema:
+ *          type: object
+ *          required:
+ *            - email
+ *          properties:
+ *             email:
+ *              type: string
+ *             subject:
+ *              type: string
+ *             message:
+ *              type: string
+ *     responses:
+ *       201:
+ *         description: Created
+ */
 app.post("/mail", async (req, res) => {
-    console.log(req)
+    // console.log(req)
     await sendEmail({
-        email:req.body.email,
-        subject:req.body.subject,
-        message:req.body.message
+        email: req.body.email,
+        subject: req.body.subject,
+        message: req.body.message
     });
     res.status(200).json({
         success: true,
